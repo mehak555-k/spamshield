@@ -15,7 +15,7 @@ export default function Inbox() {
   const fetchInbox = async () => {
     try {
       setLoading(true);
-      const res = await axios.get('http://localhost:5000/api/gmail/inbox', {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/gmail/inbox`, {
         headers: { Authorization: `Bearer ${user._id}` }
       });
       setEmails(res.data);
@@ -29,7 +29,7 @@ export default function Inbox() {
   const syncGmail = async () => {
     try {
       setSyncing(true);
-      await axios.post('http://localhost:5000/api/gmail/sync', {}, {
+      await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/gmail/sync`, {}, {
         headers: { Authorization: `Bearer ${user._id}` }
       });
       await fetchInbox();

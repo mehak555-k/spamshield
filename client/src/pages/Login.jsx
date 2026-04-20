@@ -32,7 +32,7 @@ export default function Login() {
   const handleGoogleLogin = async () => {
     try {
       // Typically we'd fetch the URL from the backend and redirect
-      const response = await fetch('http://localhost:5000/api/auth/google');
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/auth/google`);
       const data = await response.json();
       if (data.url) {
         window.location.href = data.url;

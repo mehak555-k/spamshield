@@ -18,7 +18,7 @@ export default function Dashboard() {
   const fetchStats = async () => {
     try {
       // Setup axios interceptor or pass token manually if JWT used. We'll pass it simply for now.
-      const res = await axios.get('http://localhost:5000/api/stats/dashboard', {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/stats/dashboard`, {
         headers: { Authorization: `Bearer ${user._id}` }
       });
       setStats(res.data);
@@ -46,7 +46,7 @@ export default function Dashboard() {
   const handleRefresh = async () => {
     setSyncing(true);
     try {
-      await axios.post('http://localhost:5000/api/gmail/sync', {}, {
+      await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/gmail/sync`, {}, {
         headers: { Authorization: `Bearer ${user._id}` }
       });
       await fetchStats();

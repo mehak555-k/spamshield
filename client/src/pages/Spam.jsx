@@ -15,7 +15,7 @@ export default function Spam() {
   const fetchSpam = async () => {
     try {
       setLoading(true);
-      const res = await axios.get('http://localhost:5000/api/gmail/spam', {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/gmail/spam`, {
         headers: { Authorization: `Bearer ${user._id}` }
       });
       setEmails(res.data);
@@ -29,7 +29,7 @@ export default function Spam() {
   const emptySpam = async () => {
     try {
       setLoading(true);
-      await axios.delete('http://localhost:5000/api/gmail/spam', {
+      await axios.delete(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/gmail/spam`, {
         headers: { Authorization: `Bearer ${user._id}` }
       });
       setEmails([]);
@@ -43,7 +43,7 @@ export default function Spam() {
   const syncGmail = async () => {
     try {
       setSyncing(true);
-      await axios.post('http://localhost:5000/api/gmail/sync', {}, {
+      await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/gmail/sync`, {}, {
         headers: { Authorization: `Bearer ${user._id}` }
       });
       await fetchSpam();
